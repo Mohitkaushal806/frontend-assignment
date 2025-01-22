@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const CustomDropdown = ({ options, selectedValues, onChange, onAddOption, isMulti, removeSelected }) => {
+const CustomDropdown = ({ options, selectedValues, onClick, onAddOption, isMulti, removeSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newValue, setNewValue] = useState("");
 
   const dropdownRef = useRef();
 
+  // Handle Dropdown Outside Click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -49,7 +50,7 @@ const CustomDropdown = ({ options, selectedValues, onChange, onAddOption, isMult
         <div className="dropdown-menu">
           {options.map((option, index) => (
             <div key={index} className="dropdown-item" onClick={() => {
-                onChange(option, isMulti)
+                onClick(option, isMulti)
                 if(!isMulti) setIsOpen(false)
               }}>
               {option}
